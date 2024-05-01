@@ -86,4 +86,30 @@ class HomeController extends Controller
     }
     
 
+    public function deleteMeme(Request $request)
+    {
+        // Get the meme ID from the request
+        $memeId = $request->input('meme_id');
+
+        // Get the authenticated user's ID (assuming you're using authentication)
+        $userId = auth()->id();
+
+        // Find the meme by ID and user ID
+        $meme = Meme::where('id', $memeId)->where('user_id', $userId)->first();
+
+        if ($meme) {
+            // User is authorized to delete the meme, you can delete it here
+            $meme->delete();
+            // Optionally, you can return a success message or redirect the user
+        }else{
+            // User is not authorized to delete the meme, you can return an error message or redirect the user
+        }
+        return back();
+    }
+
+    public function checking(Request $request)
+    {
+        return view ('register');
+    }
+
 }

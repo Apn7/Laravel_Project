@@ -21,4 +21,10 @@ Route::post('/like', [HomeController::class, 'like'])->name('like');
 
 Route::post('/comment', [HomeController::class, 'comment'])->name('comment');
 
+Route::post('/deletMeme', [HomeController::class, 'deleteMeme'])->name('deleteMeme');
+
 Route::post('/deletComment', [HomeController::class, 'deleteComment'])->name('deleteComment');
+
+Route::post('/checking', [HomeController::class, 'checking'])->name('checking');
+
+
