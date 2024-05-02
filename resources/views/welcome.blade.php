@@ -48,23 +48,7 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <p class="card-text align-items-left">Uploaded by: {{ $meme->user->username }} </p>
-                                @if ($meme->user_id == Auth::id())
-                                    {{-- <div class="align-items-right">
-                                        <form id="deleteMemeForm" action="{{ route('deleteMeme')}}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="meme_id" value="{{ $meme->id }}">
-                                            <i id="deleteMemeIcon" class="ri-delete-bin-6-line custom-icon"
-                                                onclick="memeDeleteForm()" style="cursor: pointer;"></i>
-                                        </form>
-                                    </div> --}}
-                                    //button for delete meme
-                                    <form id="deleteMemeForm" action="{{ route('checking') }}" method="post">
-                                        @csrf
-                                        
-                                        <button type="submit" class="btn btn-outline-danger"
-                                            style="padding: 5px 10px; border-radius: 20px;">Delete</button>
-                                    </form>
-                                @endif
+                                
                                 <p class="card-text">{{ $meme->description }}</p>
                                 <!-- Like Button -->
                                 @if (Auth::check())

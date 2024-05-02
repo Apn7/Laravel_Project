@@ -25,6 +25,5 @@ Route::post('/deletMeme', [HomeController::class, 'deleteMeme'])->name('deleteMe
 
 Route::post('/deletComment', [HomeController::class, 'deleteComment'])->name('deleteComment');
 
-Route::post('/checking', [HomeController::class, 'checking'])->name('checking');
 
 
