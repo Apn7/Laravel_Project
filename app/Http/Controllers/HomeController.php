@@ -12,7 +12,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $memes = Meme::all();
+        $memes = Meme::paginate(3);
         return view('welcome', ['memes' => $memes]);
     }
 
@@ -84,7 +84,7 @@ class HomeController extends Controller
         }
         return back();
     }
-    
+
 
     public function deleteMeme(Request $request)
     {
@@ -107,9 +107,38 @@ class HomeController extends Controller
         return back();
     }
 
-    public function checking(Request $request)
+    public function editMeme(Request $request)
     {
-        return view ('register');
+        // Get the meme ID and new content from the request
+        $memeId = $request->input('meme_id');
+        $newDescription = $request->input('description');
+
+        // Get the authenticated user's ID (assuming you're using authentication)
+        $userId = auth()->id();
+
+        // Find the meme by ID and user ID
+        $meme = Meme::where('id', $memeId)->where('user_id', $userId)->first();
+
+        if ($meme) {
+            // User is authorized to edit the meme, you can update the content here
+            $meme->description = $newDescription;
+            $meme->save();
+            // Optionally, you can return a success message or redirect the user
+        }else{
+            // User is not authorized to edit the meme, you can return an error message or redirect the user
+        }
+        return back();
+    }
+
+    public function editMemeView($memeId)
+    {
+        // Find the meme by ID
+        $meme = Meme::find($memeId);
+
+        // Optionally, you can check if the meme exists and if the authenticated user is the owner
+        // before allowing them to edit the meme
+
+        return view('edit_Meme', ['meme' => $meme]);
     }
 
 }

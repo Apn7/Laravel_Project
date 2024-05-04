@@ -21,7 +21,7 @@ class UploadController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()) . '.' . $request->file('imgurl')->getClientOriginalExtension();
             $image = $manager->read($request->file('imgurl'));
-            $image->resize(600, 900);
+            $image->resize(500,600);
             $image->save(base_path('public/storage/memes/' . $name_gen));
             $formFields['imgurl'] = 'memes/' . $name_gen;
         }

@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 
@@ -25,5 +26,10 @@ Route::post('/deletMeme', [HomeController::class, 'deleteMeme'])->name('deleteMe
 
 Route::post('/deletComment', [HomeController::class, 'deleteComment'])->name('deleteComment');
 
+Route::post('/editMeme', [HomeController::class, 'editMeme'])->name('editMeme');
+
+Route::get('/editMemeView/{id}', [HomeController::class, 'editMemeView'])->name('editMemeView');
+
+Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('profile');
 
 

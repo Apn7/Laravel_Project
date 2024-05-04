@@ -23,9 +23,25 @@
                     </li>
                 @endauth
             </ul>
-            <span class="navbar-text">
-                Navbar text with an inline element
-            </span>
+            @auth
+            <ul class="navbar-nav ml-auto"> <!-- Added ml-auto class for right alignment -->
+                <li class="nav-item" style="margin-right: 10px">
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                </li>
+                <li class="nav-item" style="margin-right: 10px">
+                    <button class="btn btn-outline-success" type="button" id="button-addon2">Search</button>
+                </li>
+                <li class="nav-item" style="margin-right: 10px">
+                    <a href="" class="btn btn-outline-success">Notification</a>
+                </li>
+                <li class="nav-item">
+                    <!-- User profile picture with link -->
+                    <a href="{{route('profile',['username' => Auth::user()->username])}}">
+                        <img src="{{asset('storage/users_dp/user_dp.jpg')}}" class="rounded-circle img-fluid" alt="User Profile Picture" style="width: 50px; height: 50px;">
+                    </a>
+                </li>
+            </ul>
+            @endauth
         </div>
     </div>
 </nav>
