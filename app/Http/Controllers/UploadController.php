@@ -13,8 +13,10 @@ class UploadController extends Controller
     public function upload(Request $request)
     {
 
+
         $formFields = $request->validate([
-            'description' => 'required'
+            'description' => 'required',
+            'tags' => 'nullable|string'
         ]);
 
         if ($request->hasFile('imgurl')) {
@@ -27,6 +29,7 @@ class UploadController extends Controller
         }
 
         $formFields['user_id'] = auth()->id();
+        
 
         Meme::create($formFields);
 

@@ -12,7 +12,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $memes = Meme::paginate(3);
+        $memes = Meme::latest()->filter
+            (request(['tag','search']))->paginate(3);
+
+
         return view('welcome', ['memes' => $memes]);
     }
 

@@ -13,7 +13,8 @@ class Meme extends Model
     protected $fillable = [
         'user_id',
         'imgurl',
-        'description'
+        'description',
+        'tags'
     ];
 
     public function user()
@@ -29,4 +30,16 @@ class Meme extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['tag'] ?? false) {
+            $query->where('tags', 'like', '%' . request('tag') . '%');
+        }
+        if ($filters['search'] ?? false) {
+            $query->where('description', 'like', '%' . request('search') . '%')
+                  ->orWhere('tags', 'like', '%' . request('search') . '%');
+        }
+    }
+
 }

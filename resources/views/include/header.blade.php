@@ -24,23 +24,29 @@
                 @endauth
             </ul>
             @auth
-            <ul class="navbar-nav ml-auto"> <!-- Added ml-auto class for right alignment -->
-                <li class="nav-item" style="margin-right: 10px">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                </li>
-                <li class="nav-item" style="margin-right: 10px">
-                    <button class="btn btn-outline-success" type="button" id="button-addon2">Search</button>
-                </li>
-                <li class="nav-item" style="margin-right: 10px">
-                    <a href="" class="btn btn-outline-success">Notification</a>
-                </li>
-                <li class="nav-item">
-                    <!-- User profile picture with link -->
-                    <a href="{{route('profile',['username' => Auth::user()->username])}}">
-                        <img src="{{asset('storage/users_dp/user_dp.jpg')}}" class="rounded-circle img-fluid" alt="User Profile Picture" style="width: 50px; height: 50px;">
-                    </a>
-                </li>
-            </ul>
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item me-2">
+                        <form class="d-flex align-items-center" action="/">
+                            <div class="input-group">
+                                <input class="form-control border-1 rounded-start me-2" type="search" placeholder="Search"
+                                    aria-label="Search" name="search">
+                                <button class="btn btn-outline-success rounded-end" type="submit">Search</button>
+                            </div>
+                        </form>
+                    </li>
+
+                    <li class="nav-item me-2">
+                        <a href="" class="btn btn-outline-success">Notification</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- User profile picture with link -->
+                        <a href="{{ route('profile', ['username' => Auth::user()->username]) }}">
+                            <img src="{{ asset('storage/users_dp/user_dp.jpg') }}" class="rounded-circle img-fluid"
+                                alt="User Profile Picture" style="width: 50px; height: 50px;">
+                        </a>
+                    </li>
+                </ul>
             @endauth
         </div>
     </div>

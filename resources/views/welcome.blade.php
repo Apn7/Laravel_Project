@@ -28,6 +28,10 @@
                     <input type="text" class="form-control" id="description" name="description" required>
                 </div>
                 <div class="form-group">
+                    <label for="tags"> Tags (Comma Separated) </label>
+                    <input type="text" class="form-control" id="tags" name="tags">
+                </div>
+                <div class="form-group">
                     <label for="image">Image</label>
                     <input type="file" class="form-control" id="imgurl" name="imgurl" required>
                 </div>
