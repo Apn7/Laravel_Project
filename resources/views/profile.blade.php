@@ -12,6 +12,17 @@
             alt="User Profile Picture" style="width: 200px; height: 200px;">
     </div>
     <div class="container text-center">
+        @if (Auth::id() != $user->id)
+                <form action="{{ route('follow') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <button type="submit" class="btn btn-{{ Auth::user()->following->contains($user->id) ? 'danger' : 'primary' }} mt-3">
+                        {{ Auth::user()->following->contains($user->id) ? 'Unfollow' : 'Follow' }}
+                    </button>
+                </form>
+        @endif
+    </div>
+    <div class="container text-center">
         <h3 class="mt-3">Email: {{ $user->email }}</h3>
     </div>
     <div class="container text-center">

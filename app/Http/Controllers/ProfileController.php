@@ -22,4 +22,16 @@ class ProfileController extends Controller
         $memes = Meme::where('user_id', $user->id)->paginate(2);
         return view('profile', ['user' => $user, 'memes' => $memes]);
     }
+    public function follow(Request $request)
+    {
+        // Find the user by their username
+        $user_id = $request->input('user_id');
+
+        $follower = auth()->user();
+
+        $follower->following()->toggle($user_id);
+
+
+        return back();
+    }
 }

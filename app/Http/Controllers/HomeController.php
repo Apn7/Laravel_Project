@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use App\Models\Meme;
+use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -144,4 +145,18 @@ class HomeController extends Controller
         return view('edit_Meme', ['meme' => $meme]);
     }
 
+
+    public function myFeed()
+    {
+        // Get the authenticated user's ID (assuming you're using authentication)
+        $userId = auth()->id();
+
+        // Get the IDs of the users that the authenticated user is following
+        $followingIds = User::find($userId)->following()->pluck('user_id');
+
+        // Get the memes of the users that the authenticated user is following
+        $memes = Meme::whereIn('user_id', $followingIds)->latest()->paginate(3);
+
+        return view('my_feed', ['memes' => $memes]);
+    }
 }

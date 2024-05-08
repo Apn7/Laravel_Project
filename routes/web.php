@@ -32,4 +32,7 @@ Route::get('/editMemeView/{id}', [HomeController::class, 'editMemeView'])->name(
 
 Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('profile');
 
+Route::post('/follow', [ProfileController::class, 'follow'])->name('follow');
+
+Route::get('/my_feed', [HomeController::class, 'myFeed'])->name('my_feed');
 
