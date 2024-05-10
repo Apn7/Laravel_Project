@@ -42,8 +42,13 @@
                     <li class="nav-item">
                         <!-- User profile picture with link -->
                         <a href="{{ route('profile', ['username' => Auth::user()->username]) }}">
-                            <img src="{{ asset('storage/users_dp/user_dp.jpg') }}" class="rounded-circle img-fluid"
-                                alt="User Profile Picture" style="width: 50px; height: 50px;">
+                            @if (Auth::user()->avatar)
+                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" class="rounded-circle img-fluid"
+                                    alt="User Profile Picture" style="width: 50px; height: 50px;">
+                            @else
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=random" class="rounded-circle img-fluid"
+                                    alt="User Profile Picture" style="width: 50px; height: 50px;">
+                            @endif
                         </a>
                     </li>
                 </ul>

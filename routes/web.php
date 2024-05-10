@@ -30,11 +30,13 @@ Route::post('/editMeme', [HomeController::class, 'editMeme'])->name('editMeme');
 
 Route::post('/editMemeView', [HomeController::class, 'editMemeView'])->name('editMemeView');
 
-Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('profile');
+Route::match(['get', 'post'], '/profile/{username}', [ProfileController::class, 'profile'])->name('profile');
 
 Route::post('/follow', [ProfileController::class, 'follow'])->name('follow');
 
 Route::get('/my_feed', [HomeController::class, 'myFeed'])->name('my_feed');
 
 Route::get('/meme/{id}', [HomeController::class, 'meme'])->name('meme');
+
+Route::post('/uploaddp', [UploadController::class, 'uploadDp'])->name('uploaddp');
 

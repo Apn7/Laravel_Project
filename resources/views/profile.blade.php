@@ -7,10 +7,31 @@
         <h1 class="mt-5">User
             Profile: {{ $user->username }}</h1>
     </div>
+
     <div class="container text-center">
-        <img src="{{ asset('storage/users_dp/user_dp.jpg')}}" class="rounded-circle img-fluid"
-            alt="User Profile Picture" style="width: 200px; height: 200px;">
+        @if ($user->avatar)
+            <img src="{{asset('storage/' . $user->avatar)}}" class="rounded-circle img-fluid"
+                alt="User Profile Picture" style="width: 200px; height: 200px;">
+        @else
+            <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random" class="rounded-circle img-fluid"
+                alt="User Profile Picture" style="width: 200px; height: 200px;">
+        @endif
     </div>
+    {{-- upload image --}}
+    @if (Auth::id() == $user->id)
+        <div class="container">
+            <form action="{{route('uploaddp')}}" method="post" enctype="multipart/form-data" class="ms-auto me-auto mt-3"
+                style="width: 500px">
+                @csrf
+                <div class="form-group">
+                    <label for="image">Upload a DP</label>
+                    <input type="file" class="form-control" id="avatar" name="avatar" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    @endif
+
     <div class="container text-center">
         @if (Auth::id() != $user->id)
                 <form action="{{ route('follow') }}" method="post">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meme;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Intervention\Image\ImageManager;
@@ -29,11 +30,38 @@ class UploadController extends Controller
         }
 
         $formFields['user_id'] = auth()->id();
-        
+
 
         Meme::create($formFields);
 
         return redirect()->route('home');
 
     }
+
+    public function uploadDp(Request $request)
+    {
+
+        $formFields = $request->validate([
+            'avatar' => 'required'
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()) . '.' . $request->file('avatar')->getClientOriginalExtension();
+            $image = $manager->read($request->file('avatar'));
+            $image->resize(50,50);
+            $image->save(base_path('public/storage/users_dp/' . $name_gen));
+            $formFields['avatar'] = 'users_dp/' . $name_gen;
+        }
+
+        $userID = auth()->id();
+
+        $user = User::find($userID);
+
+        $user->update($formFields);
+
+        return redirect()->route('profile', ['username' => $user->username]);
+    }
+
+
 }
