@@ -28,11 +28,13 @@ Route::post('/deletComment', [HomeController::class, 'deleteComment'])->name('de
 
 Route::post('/editMeme', [HomeController::class, 'editMeme'])->name('editMeme');
 
-Route::get('/editMemeView/{id}', [HomeController::class, 'editMemeView'])->name('editMemeView');
+Route::post('/editMemeView', [HomeController::class, 'editMemeView'])->name('editMemeView');
 
 Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('profile');
 
 Route::post('/follow', [ProfileController::class, 'follow'])->name('follow');
 
 Route::get('/my_feed', [HomeController::class, 'myFeed'])->name('my_feed');
+
+Route::get('/meme/{id}', [HomeController::class, 'meme'])->name('meme');
 

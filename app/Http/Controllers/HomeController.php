@@ -134,8 +134,10 @@ class HomeController extends Controller
         return back();
     }
 
-    public function editMemeView($memeId)
+    public function editMemeView(Request $request)
     {
+        // Get the meme ID from the request
+        $memeId = $request->input('meme_id');
         // Find the meme by ID
         $meme = Meme::find($memeId);
 
@@ -159,4 +161,16 @@ class HomeController extends Controller
 
         return view('my_feed', ['memes' => $memes]);
     }
+
+    public function meme($memeId)
+    {
+        // Find the meme by ID
+        $meme = Meme::find($memeId);
+
+        // Optionally, you can check if the meme exists and if the authenticated user is the owner
+        // before allowing them to view the meme
+
+        return view('meme_details', ['meme' => $meme]);
+    }
+
 }
