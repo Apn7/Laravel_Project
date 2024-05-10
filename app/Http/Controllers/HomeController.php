@@ -131,7 +131,7 @@ class HomeController extends Controller
         }else{
             // User is not authorized to edit the meme, you can return an error message or redirect the user
         }
-        return redirect()->route('editMemeView', ['meme' => $meme]);
+        return view('edit_Meme', ['meme' => $meme]);
     }
 
     public function editMemeView(Request $request)
