@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 
@@ -26,9 +27,9 @@ Route::post('/deletMeme', [HomeController::class, 'deleteMeme'])->name('deleteMe
 
 Route::post('/deletComment', [HomeController::class, 'deleteComment'])->name('deleteComment');
 
-Route::post('/editMeme', [HomeController::class, 'editMeme'])->name('editMeme');
+Route::get('/editMemeView/{id}', [HomeController::class, 'editMemeView'])->name('editMemeView');
 
-Route::post('/editMemeView', [HomeController::class, 'editMemeView'])->name('editMemeView');
+Route::post('/editMeme', [HomeController::class, 'editMeme'])->name('editMeme');
 
 Route::match(['get', 'post'], '/profile/{username}', [ProfileController::class, 'profile'])->name('profile');
 
@@ -39,4 +40,17 @@ Route::get('/my_feed', [HomeController::class, 'myFeed'])->name('my_feed');
 Route::get('/meme/{id}', [HomeController::class, 'meme'])->name('meme');
 
 Route::post('/uploaddp', [UploadController::class, 'uploadDp'])->name('uploaddp');
+
+Route::match(['get', 'post'],'/editProfileView/{username}', [ProfileController::class, 'editProfileView'])->name('editProfileView');
+
+Route::post('/editProfile', [ProfileController::class, 'editProfile'])->name('editProfile');
+
+Route::post('/editPass', [ProfileController::class, 'editPass'])->name('editPass');
+
+Route::get('/search_users', [ProfileController::class, 'searchUsers'])->name('search_users');
+
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+
+Route::get('/notifications/{notification}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+
 

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('meme_id');
-            $table->foreign('meme_id')->references('id')->on('memes')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('type');  // e.g., 'meme_uploaded', 'meme_liked', 'meme_commented'
+            $table->text('message');  // Message to display
+            $table->boolean('read')->default(false);
+            $table->morphs('notifiable');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('notifications');
     }
 };

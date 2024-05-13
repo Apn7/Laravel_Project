@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meme;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class ProfileController extends Controller
 {
@@ -34,4 +36,62 @@ class ProfileController extends Controller
 
         return back();
     }
+
+    public function editProfileView($username)
+    {
+        $user = User::where('username', $username)->first();
+        return view('edit_user_info', ['user' => $user]);
+    }
+
+    public function editProfile(Request $request)
+    {
+        $formFields = $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,username,' . auth()->id(),
+            'email' => 'required|email|unique:users,email,' . auth()->id(),
+            'bio' => 'nullable|string',
+        ]);
+
+        $userID = auth()->id();
+        $user = User::find($userID);
+
+        $user->update($formFields);
+
+        return redirect()->route('profile', ['username' => $user->username]);
+
+    }
+
+    public function editPass(Request $request)
+    {
+
+        $request->validate([
+            'current' => 'required',
+            'new' => 'required|confirmed',
+        ]);
+
+        $userID = auth()->id();
+        $user = User::find($userID);
+
+
+        if (!(Hash::check($request->current, $user->password))) {
+            return redirect()->back()->withErrors(['current' => 'The current password is incorrect.']);
+        }
+
+        $user->password = Hash::make($request->new);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password changed successfully.');
+    }
+
+    public function searchUsers(Request $request)
+    {
+        $query = $request->input('query');
+
+        $users = User::where('name', 'like', "%$query%")
+            ->orWhere('username', 'like', "%$query%")
+            ->get();
+
+        return view('searched_users', ['users' => $users]);
+    }
+
 }

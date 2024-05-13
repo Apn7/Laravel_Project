@@ -35,8 +35,8 @@
                                 @if ($meme->user->id == Auth::id())
                                     <div>
 
-                                        <form id="editMemeForm{{ $meme->id }}" action="{{ route('editMemeView') }}"
-                                            method="post">
+                                        <form id="editMemeForm{{ $meme->id }}" action="{{ route('editMemeView',['id'=>$meme->id]) }}"
+                                            method="get">
                                             @csrf
                                             <input type="hidden" name="meme_id" value="{{ $meme->id }}">
                                             <i id="editMemeIcon" class="ri-edit-line custom-icon"

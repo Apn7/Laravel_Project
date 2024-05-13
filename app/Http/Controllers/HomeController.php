@@ -6,7 +6,9 @@ use App\Models\Like;
 use App\Models\Meme;
 use App\Models\User;
 use App\Models\Comment;
+use App\Events\MemeLiked;
 use Illuminate\Http\Request;
+use App\Events\MemeCommented;
 
 class HomeController extends Controller
 {
@@ -42,6 +44,13 @@ class HomeController extends Controller
                 'user_id' => $userId,
                 'meme_id' => $memeId,
             ]);
+
+            //create event for notification
+            $user = User::find($userId);
+            $meme = Meme::find($memeId);
+            if ($user->id != $meme->user_id) {
+                event(new MemeLiked($user, $meme));
+            }
             // Optionally, you can return a success message or redirect the user
         }
         return back();
@@ -62,7 +71,12 @@ class HomeController extends Controller
             'meme_id' => $memeId,
             'content' => $content,
         ]);
-
+        //trigger event for notification
+        $user = User::find($userId);
+        $meme = Meme::find($memeId);
+        if ($user->id != $meme->user_id) {
+            event(new MemeCommented($user, $meme));
+        }
         // Optionally, you can return a success message or redirect the user
         return back();
     }
@@ -108,7 +122,7 @@ class HomeController extends Controller
         }else{
             // User is not authorized to delete the meme, you can return an error message or redirect the user
         }
-        return back();
+        return redirect()->route('home');
     }
 
     public function editMeme(Request $request)
@@ -134,10 +148,8 @@ class HomeController extends Controller
         return view('edit_Meme', ['meme' => $meme]);
     }
 
-    public function editMemeView(Request $request)
+    public function editMemeView($memeId)
     {
-        // Get the meme ID from the request
-        $memeId = $request->input('meme_id');
         // Find the meme by ID
         $meme = Meme::find($memeId);
 

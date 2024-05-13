@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Meme;
 use App\Models\User;
+use App\Events\MemeUploaded;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Intervention\Image\ImageManager;
@@ -30,9 +31,12 @@ class UploadController extends Controller
         }
 
         $formFields['user_id'] = auth()->id();
+        $user = User::find(auth()->id());
 
+        $meme = Meme::create($formFields);
 
-        Meme::create($formFields);
+        // Trigger the event after the meme is successfully saved
+        event(new MemeUploaded($user, $meme));
 
         return redirect()->route('home');
 

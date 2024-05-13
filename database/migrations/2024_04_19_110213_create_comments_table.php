@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->text('content');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('meme_id')->references('id')->on('memes');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('meme_id')->references('id')->on('memes')->onDelete('cascade');
         });
     }
 
