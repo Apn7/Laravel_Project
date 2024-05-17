@@ -7,6 +7,7 @@ use App\Models\Meme;
 use App\Models\User;
 use App\Models\Comment;
 use App\Events\MemeLiked;
+use App\Models\ReportedMeme;
 use Illuminate\Http\Request;
 use App\Events\MemeCommented;
 
@@ -18,8 +19,9 @@ class HomeController extends Controller
         $memes = Meme::latest()->filter
             (request(['tag','search']))->paginate(3);
 
+        $topTags = $this->getTopTags();
 
-        return view('welcome', ['memes' => $memes]);
+        return view('welcome', ['memes' => $memes , 'topTags' => $topTags]);
     }
 
     public function like(Request $request)
@@ -168,10 +170,22 @@ class HomeController extends Controller
         // Get the IDs of the users that the authenticated user is following
         $followingIds = User::find($userId)->following()->pluck('user_id');
 
+        $topTags = $this->getTopTags();
+
         // Get the memes of the users that the authenticated user is following
         $memes = Meme::whereIn('user_id', $followingIds)->latest()->paginate(3);
 
-        return view('my_feed', ['memes' => $memes]);
+        return view('my_feed', ['memes' => $memes], ['topTags' => $topTags]);
+    }
+
+    public function trendingMemes()
+    {
+        // Fetch trending memes
+        $memes = Meme::trending()->paginate(3);
+
+        $topTags = $this->getTopTags();
+
+        return view('trending_memes', ['memes' => $memes, 'topTags' => $topTags]);
     }
 
     public function meme($memeId)
@@ -183,6 +197,54 @@ class HomeController extends Controller
         // before allowing them to view the meme
 
         return view('meme_details', ['meme' => $meme]);
+    }
+
+    public function getTopTags()
+    {
+        // Fetch all tags from the Meme model
+        $tags = Meme::pluck('tags'); // This plucks tags from all memes
+
+        $tagCount = collect();
+
+        // Split tags and count occurrences
+        foreach ($tags as $tagString) {
+            $individualTags = explode(',', $tagString);
+            foreach ($individualTags as $tag) {
+                $tag = trim($tag);
+                if ($tag !== '') {
+                    $tagCount->put($tag, $tagCount->get($tag, 0) + 1);
+                }
+            }
+        }
+
+        // Sort by count and take top 10
+        $topTags = $tagCount->sortDesc()->take(10);
+
+        return $topTags;
+    }
+
+    public function report(Request $request){
+        $memeId = $request->input('meme_id');
+        $userId = auth()->id();
+
+        return view('reportMeme', ['meme_id' => $memeId, 'user_id' => $userId]);
+    }
+
+    public function reportPost(Request $request){
+        $request->validate([
+            'reason' => 'required',
+        ]);
+        $memeId = $request->input('meme_id');
+        $userId = auth()->id();
+        $reason = $request->input('reason');
+
+        ReportedMeme::create([
+            'meme_id' => $memeId,
+            'user_id' => $userId,
+            'reason' => $reason,
+        ]);
+
+        return redirect()->back()->with('success', 'Meme reported successfully');
     }
 
 }

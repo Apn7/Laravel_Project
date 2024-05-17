@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Meme Details')
+@section('title', 'Trending Memes')
 @section('content')
 
 <div class="container mt-3">
@@ -58,12 +58,44 @@
             </div>
 
 
-            @include('detailedMeme')
+            @include('show_memes')
 
         </div>
 
         <div class="col-md-3">
-            
+            <div class="container text-center mb-3">
+                <h1 class="mt-4">Trending Tags</h1>
+            </div>
+            {{-- <div class="btn-group-vertical">
+                @foreach ()
+                    <button type="button" class="btn btn-outline-secondary">{{ $tag }} ({{ $count }})</button>
+                @endforeach
+            </div> --}}
+            <div class="container">
+                <div class="row">
+                    @php $i = 0; @endphp
+                    @foreach ($topTags as $tag => $count)
+                        @if ($i % 3 == 0 && $i != 0)
+                            </div>
+                            <div class="row mt-2">
+                        @endif
+                        <div class="col-md-4">
+                            <a href="/?tag={{ $tag }}" class="btn btn-danger rounded-pill">
+                                {{ $tag }}({{ $count }})
+                            </a>
+                        </div>
+                        @php $i++; @endphp
+                    @endforeach
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="mt-5 text-center">
+            {{ $memes->onEachSide(1)->links() }}
         </div>
     </div>
 

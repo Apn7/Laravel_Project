@@ -8,3 +8,7 @@ function memeDeleteForm(memeID) {
 function memeEditForm(memeID){
     document.getElementById("editMemeForm"+memeID).submit();
 }
+
+function reportMemeForm(memeId) {
+    document.getElementById("reportMemeForm" + memeId).submit();
+}

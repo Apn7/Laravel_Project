@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,4 +43,20 @@ class Meme extends Model
         }
     }
 
+    public function scopeTrending($query)
+    {
+        $now = now();
+        return $query->withCount('likes')
+                     ->withCount('comments')
+                     ->orderByDesc(DB::raw('
+                         (likes_count + (comments_count * 2)) /
+                         POWER(TIMESTAMPDIFF(SECOND, created_at, "' . $now . '"), 1.5)
+                     '));
+    }
+
+    public function reportedMemes()
+    {
+        return $this->hasMany(ReportedMeme::class);
+    }
+    
 }

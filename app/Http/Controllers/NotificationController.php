@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meme;
+use App\Models\User;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 
@@ -41,5 +42,17 @@ class NotificationController extends Controller
                 abort(404);
             }
         }
+        // check if notifiable id is user id
+        if ($notification->notifiable_type == 'App\Models\User') {
+            $user = User::find($notification->notifiable_id);
+            if ($user){
+                return redirect()->route('profile', $user->username);
+            }
+            else{
+                //return error
+                abort(404);
+            }
+        }
+
     }
 }

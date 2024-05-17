@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Meme;
 use App\Models\User;
+use App\Events\UserFollowed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,7 +20,6 @@ class ProfileController extends Controller
         if (!$user) {
             abort(404);
         }
-
         // Load the user's memes and return the profile view
         $memes = Meme::where('user_id', $user->id)->paginate(2);
         return view('profile', ['user' => $user, 'memes' => $memes]);
@@ -29,9 +29,20 @@ class ProfileController extends Controller
         // Find the user by their username
         $user_id = $request->input('user_id');
 
+
         $follower = auth()->user();
 
+        $isFollowing = $follower->following()->where('user_id', $user_id)->exists();
+
         $follower->following()->toggle($user_id);
+
+
+        $userToFollow = User::find($user_id);
+        $tfollower = User::find($follower->id);
+
+        if (!$isFollowing) {
+            event(new UserFollowed($tfollower, $userToFollow));
+        }
 
 
         return back();

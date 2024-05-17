@@ -23,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MemeCommented' => [
             'App\Listeners\NotifyMemeCommented',
         ],
+        'App\Events\UserFollowed' => [
+            'App\Listeners\NotifyUserFollowed',
+        ],
     ];
 
     /**

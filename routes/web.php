@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthManager;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NotificationController;
@@ -52,5 +53,23 @@ Route::get('/search_users', [ProfileController::class, 'searchUsers'])->name('se
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
 Route::get('/notifications/{notification}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+
+Route::get('/trending', [HomeController::class, 'trendingMemes'])->name('trending');
+
+Route::get('/report', [HomeController::class, 'report'])->name('report');
+
+Route::post('/report', [HomeController::class, 'reportPost'])->name('report.post');
+
+// Admin routes
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/reports',[AdminController::class,'reports'])->name('admin.reports');
+    Route::post('/admin/deleteReport',[AdminController::class,'deteleReport'])->name('admin.deleteReport');
+    // Add more admin routes as needed
+});
+
+
+
 
 

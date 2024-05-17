@@ -8,7 +8,11 @@
                 <img src="{{ asset('storage/' . $meme->imgurl) }}" class="card-img-top img-fluid"
                     style="max-width: 100%; height: auto;" alt="Meme Image">
                 <div class="card-body">
-                    <x-meme_tags :tagsCsv="$meme->tags"/>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <x-meme_tags :tagsCsv="$meme->tags" />
+                        </div>
+                    </div>
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
