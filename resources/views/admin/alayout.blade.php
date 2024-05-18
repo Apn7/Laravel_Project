@@ -25,6 +25,7 @@
                     <a class="nav-link" href="{{ url('/admin') }}">Dashboard</a>
                     <a class="nav-link" href="{{ url('/admin/users') }}">Manage Users</a>
                     <a class="nav-link" href="{{ url('/admin/reports') }}">Reported Memes</a>
+                    <a class="nav-link" href="{{ url('/admin/context') }}">Upload Meme Context</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link" href="{{ route('logout') }}"

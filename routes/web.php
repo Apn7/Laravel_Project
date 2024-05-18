@@ -60,12 +60,18 @@ Route::get('/report', [HomeController::class, 'report'])->name('report');
 
 Route::post('/report', [HomeController::class, 'reportPost'])->name('report.post');
 
+Route::get('/memeContext', [HomeController::class, 'memeContext'])->name('memeContext');
+
 // Admin routes
 Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/admin/reports',[AdminController::class,'reports'])->name('admin.reports');
     Route::post('/admin/deleteReport',[AdminController::class,'deteleReport'])->name('admin.deleteReport');
+    Route::post('/admin/deleteUser',[AdminController::class,'deleteUser'])->name('admin.deleteUser');
+    Route::post('/admin/makeAdmin',[AdminController::class,'makeAdmin'])->name('admin.makeAdmin');
+    Route::get('/admin/context', [AdminController::class, 'context'])->name('admin.context');
+    Route::post('/admin/uploadContext', [AdminController::class, 'uploadContext'])->name('admin.uploadContext');
     // Add more admin routes as needed
 });
 

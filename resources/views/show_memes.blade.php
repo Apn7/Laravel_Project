@@ -66,7 +66,7 @@
                                         <strong>{{ $meme->likes()->count() }}</strong> Hahas</span>
                                 </div>
                                 <div>
-                                    <span style="font-size: 0.7em">Uploaded On: {{ $meme->created_at->format('M d, Y h:i A') }}</span>
+                                    <span style="font-size: 0.7em">Uploaded On: {{ $meme->created_at->timezone('Asia/Dhaka')->format('M d, Y h:i A') }}</span>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Home Page')
+@section('title', 'Meme Context')
 @section('content')
 
     {{-- upload image when logged in --}}
@@ -47,21 +47,28 @@
 
             <!-- Main content -->
             <div class="col-md-6">
+                <div class="container">
+                    <h1 class="mb-4 text-center">Check out the latest meme contexts below:</h1>
 
-                <div class="container text-center">
-                    <h1 class="mt-5">Welcome to MemeGrove</h1>
-                    <h3 class="mt-3">
-                        @auth
-                            Welcome, {{ Auth::user()->username }}!
-                        @else
-                            Welcome, Guest!
-                        @endauth
-                    </h3>
+                    <div class="d-flex flex-column align-items-center">
+                        @foreach ($memeContexts as $context)
+                            <div class="card mb-3">
+                                @if ($context->imgurl)
+                                    <img src="{{ asset('storage/' . $context->imgurl) }}" class="card-img-top img-fluid" style="width: 100%; height: auto;" alt="{{ $context->title }}">
+                                @endif
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $context->title }}</h5>
+                                    <p class="card-text">{{ $context->description }}</p>
+                                    <!-- Assuming 'Read More' leads to more details about the context -->
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <!-- Additional details like the date can be added here -->
+                                    Posted on {{ $context->created_at->timezone('Asia/Dhaka')->format('F d, Y') }}
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-
-
-                @include('show_memes')
-
             </div>
 
             <div class="col-md-3">
@@ -97,8 +104,9 @@
 
         <div class="container">
             <div class="mt-5 text-center">
-                {{ $memes->onEachSide(1)->links() }}
+                {{ $memeContexts->onEachSide(1)->links() }}
             </div>
         </div>
 
     @endsection
+

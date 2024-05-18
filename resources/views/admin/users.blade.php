@@ -20,7 +20,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            @if ($user->is_admin==1)
+                            @if ($user->is_admin == 1)
                                 <span class="badge bg-primary">Admin</span>
                             @else
                                 <span class="badge bg-secondary">User</span>
@@ -28,15 +28,26 @@
                         </td>
                         <td>
                             <div class="d-flex flex-column flex-sm-row">
-                                <div class="p-1">
-                                    <a href="#" class="btn btn-warning btn-sm w-100">Edit</a>
-                                </div>
-                                <div class="p-1">
-                                    <a href="#" class="btn btn-danger btn-sm w-100">Delete</a>
-                                </div>
-                                <div class="p-1">
-                                    <a href="#" class="btn btn-primary btn-sm w-100 mt-2 mt-sm-0">Make Admin</a>
-                                </div>
+                                @if ($user->is_admin == 0)
+                                    <!-- Delete User Form -->
+                                    <div class="p-1">
+                                        <form action="{{route('admin.deleteUser')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                            <button type="submit" class="btn btn-danger btn-sm w-100">Delete</button>
+                                        </form>
+                                    </div>
+
+                                    <!-- Make Admin Form -->
+                                    <div class="p-1">
+                                        <form action="{{route('admin.makeAdmin')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-2 mt-sm-0">Make
+                                                Admin</button>
+                                        </form>
+                                    </div>
+                                @endif
                             </div>
                         </td>
                     </tr>

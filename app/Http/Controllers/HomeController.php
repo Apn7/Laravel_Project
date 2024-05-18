@@ -10,6 +10,7 @@ use App\Events\MemeLiked;
 use App\Models\ReportedMeme;
 use Illuminate\Http\Request;
 use App\Events\MemeCommented;
+use App\Models\MemeContext;
 
 class HomeController extends Controller
 {
@@ -245,6 +246,12 @@ class HomeController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Meme reported successfully');
+    }
+
+    public function memeContext(){
+        $memeContexts = MemeContext::latest()->paginate(3);
+        $topTags = $this->getTopTags();
+        return view('meme_Contexts', ['memeContexts' => $memeContexts, 'topTags' => $topTags]);
     }
 
 }
