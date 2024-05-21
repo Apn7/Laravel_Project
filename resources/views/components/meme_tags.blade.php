@@ -22,7 +22,7 @@
                     <div class="row mt-2">
                 @endif
                 <div class="col-md-2">
-                    <a href="/?tag={{ $tag }}" class="btn btn-danger rounded-pill">
+                    <a href="/?tag={{ $tag }}" class="tag-pill">
                         {{ $tag }}
                     </a>
                 </div>

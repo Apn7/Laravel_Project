@@ -1,9 +1,403 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap");
+
+:root {
+  --header-height: 3.5rem;
+  --primary-color: #029ed7;
+  --primary-color-alt: #71d1ea;
+  --linear-gradient: linear-gradient(
+    54deg,
+    rgba(1, 148, 200, 0.95) 34%,
+    rgba(62, 212, 249, 0.95)
+  );
+  --title-color: #89cff0;
+  --text-color: #555;
+  --text-color-alt: #999;
+  --bg-color: #fff;
+  --bg-color-alt: #e9ecef;
+  --border-color: #f1f1f1;
+
+  --roboto-font: "Roboto", sans-serif;
+  --mono-font: "Roboto Mono", monospace;
+
+  --fs-h1: 2.75rem;
+  --fs-h2: 2.25rem;
+  --fs-lg: 1.125rem;
+  --fs-base: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.75rem;
+
+  --medium: 500;
+  --semibold: 600;
+  --bold: 700;
+}
+
+
+
+
 .custom-icon {
     font-size: 1.7rem;
     line-height: 1.36em;
     margin-right: 0.25rem;
     opacity: 0.6;
     transition: 0.3s;
-    color: #e22124;
+    color: #840829;
 }
+
+.custom-button {
+    background-color: #840829; /* Dark red color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background and transform */
+}
+
+.custom-button:hover, .custom-button:focus {
+    background-color: #a30f3d; /* Lighter shade of red when hovered or focused */
+    color: white;
+    transform: scale(1.05); /* Slightly increase the size */
+    cursor: pointer; /* Change cursor to pointer to indicate clickable */
+    text-decoration: none; /* Remove underline from links */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+.scrollable-container {
+    max-height: 85vh; /* Adjust based on your preference */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+body {
+    background-color: #f2f2f2;
+    font-family: var(--roboto-font)
+}
+
+
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #f8f9fa; /* Light background for the sidebar */
+    padding: 20px;
+    border-right: 2px solid #840829; /* Primary color border on the right */
+}
+
+.sidebar h1 {
+    color: #840829; /* Primary color for headings */
+    margin-bottom: 20px;
+}
+
+.sidebar .form-group label {
+    color: #333; /* Dark grey for text to maintain readability */
+}
+
+.sidebar .form-control {
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.sidebar .custom-button {
+    background-color: #840829;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar .custom-button:hover {
+    background-color: #a30f3d;
+    cursor: pointer;
+}
+
+.sidebar .list-group-item {
+    border-color: #840829; /* Border color for list items */
+    color: #840829;
+    transition: background-color 0.3s;
+}
+
+.sidebar .list-group-item:hover {
+    background-color: #840829;
+    color: white;
+}
+
+.sidebar .list-group-item-action.active {
+    background-color: #840829;
+    color: white;
+}
+
+
+/* Middle Content Area Styles */
+.middle-content {
+    padding: 20px;
+    background-color: #fff; /* White background for better readability */
+    border-left: 2px solid #840829; /* Primary color border */
+    border-right: 2px solid #840829; /* Primary color border */
+}
+
+.middle-content h2, .middle-content h4 {
+    color: #840829; /* Primary color for text */
+}
+
+
+
+/* Meme Card Styles */
+.card {
+    width: 500px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none; /* Remove default borders */
+}
+
+.card img .card-img-top {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card .card-body .card-title,
+.card .card-body .card-text {
+    color: #333;
+}
+
+/* Tags and Username Styles */
+.card .tag-pill {
+    background-color: #840829;
+    color: white;
+    border-radius: 15px;
+    padding: 2px 6px; /* Smaller padding */
+    font-size: 0.75em; /* Smaller font size */
+    margin-right: 5px;
+    display: inline-block;
+    text-transform: capitalize;
+    text-decoration: none; /* Remove underline */
+}
+
+.card .tag-pill:hover {
+    background-color: #a30f3d;
+    cursor: pointer;
+}
+
+
+.uploaded-by {
+    color: #a30f3d;
+    text-decoration: none;
+}
+
+.uploaded-by:hover {
+    text-decoration: underline;
+}
+
+/*Haha Emoji*/
+.card .haha-emoji {
+    background-color: yellow;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    transition: background-color 0.3s;
+}
+
+.card .haha-emoji:hover {
+    background-color: #f0e68c;
+    cursor: pointer;
+}
+
+/* Comment and Edit Buttons */
+.card .custom-button, .card .comment-button {
+    background-color: #840829;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    transition: background-color 0.3s;
+}
+
+.card .custom-button:hover, .card .comment-button:hover {
+    background-color: #a30f3d;
+    cursor: pointer;
+}
+
+.card .likes-count {
+    color: #840829;
+}
+
+
+
+/* Right Sidebar Styles */
+.right-sidebar {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background */
+    border-left: 2px solid #840829; /* Primary color border */
+    border-radius: 5px;
+}
+
+.right-sidebar h1 {
+    color: #840829; /* Primary color for headings */
+    margin-bottom: 20px;
+}
+
+.right-sidebar .tag-btn {
+    background-color: #840829; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 0.9em; /* Adjust font size */
+    display: inline-block;
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s;
+}
+
+.right-sidebar .tag-btn:hover {
+    background-color: #a30f3d; /* Darker shade for hover */
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+/* Custom Pagination Styles */
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination > li {
+    display: inline;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #840829;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color: #fff;
+    background-color: #840829;
+    border-color: #840829;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    color: #fff;
+    background-color: #840829;
+    border-color: #840829;
+}
+
+
+
+/* Navbar Custom Styling */
+.navbar-custom {
+    background-color: #840829; /* Primary color */
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.navbar-custom .navbar-brand {
+    margin: 0 auto; /* Center the brand/logo */
+}
+
+.navbar-custom .navbar-toggler {
+    border-color: transparent;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-custom .btn-outline-primary {
+    color: white;
+    border-color: white;
+}
+
+.navbar-custom .btn-outline-primary:hover {
+    background-color: white;
+    color: #840829;
+}
+
+/* Navbar Search and Logo Group */
+.navbar-search-logo-group {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between logo and search form */
+}
+
+/* Styling for search box and button */
+.navbar-custom .search-input-group .form-control {
+    background-color: #fff; /* Light red background */
+    border: none;
+    color: #5d5c5c; /* Primary color for text */
+    border-radius: 0.375rem 0 0 0.375rem; /* Rounded corners on the left side */
+}
+
+.navbar-custom .search-input-group .btn {
+    background-color: #e6e6e6; /* Light white background */
+    color: #840829; /* Primary color for text */
+    border-color: #840829; /* Border color */
+    border-radius: 0 0.375rem 0.375rem 0; /* Rounded corners on the right side */
+}
+
+.navbar-custom .search-input-group .btn:hover {
+    background-color: #fcc6c6 /* Slightly darker background on hover */
+}
+
+
+@media (max-width: 992px) {
+    .navbar-custom .navbar-collapse {
+        background-color: #840829;
+    }
+
+    .navbar-custom .navbar-toggler {
+        color: white;
+    }
+}
+
+
+
 

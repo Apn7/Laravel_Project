@@ -17,6 +17,8 @@
                 class="rounded-circle img-fluid" alt="User Profile Picture" style="width: 200px; height: 200px;">
         @endif
     </div>
+
+    @auth
     {{-- upload image --}}
     @if (Auth::id() == $user->id)
         <div class="container">
@@ -43,7 +45,7 @@
             </form>
         </div>
     @endif
-
+    @endauth
     <div class="container text-center">
         <h3 class="mt-3">Name: {{ $user->name }}</h3>
     </div>

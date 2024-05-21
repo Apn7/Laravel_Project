@@ -70,4 +70,8 @@ class User extends Authenticatable
         return $this->hasMany(ReportedMeme::class);
     }
 
+    public function unreadNotifications(){
+        return $this->hasMany(Notification::class)->where('read', 0)->count();
+    }
+
 }

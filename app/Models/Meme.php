@@ -58,5 +58,10 @@ class Meme extends Model
     {
         return $this->hasMany(ReportedMeme::class);
     }
-    
+
+    public function is_liked()
+    {
+        return $this->likes->contains('user_id', auth()->id());
+    }
+
 }

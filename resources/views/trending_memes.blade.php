@@ -39,26 +39,28 @@
                 @auth
                 <a href="{{route('my_feed')}}" class="list-group-item list-group-item-action">My Feed</a>
                 @endauth
-                <a href="#" class="list-group-item list-group-item-action">Meme Context</a>
+                <a href="{{route('memeContext')}}" class="list-group-item list-group-item-action">Meme Context</a>
             </div>
         </div>
 
         <!-- Main content -->
-        <div class="col-md-6">
+        <div class="col-md-6 scrollable-container">
 
             <div class="container text-center">
-                <h1 class="mt-5">Welcome to MemeGrove</h1>
-                <h3 class="mt-3">
-                    @auth
-                        Welcome, {{ Auth::user()->username }}!
-                    @else
-                        Welcome, Guest!
-                    @endauth
-                </h3>
+                <h2 class="mt-3">Trending Memes</h2>
+
             </div>
 
 
             @include('show_memes')
+
+            <div class="container">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-auto">
+                        {{ $memes->onEachSide(1)->links() }}
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -89,13 +91,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-
-    <div class="container">
-        <div class="mt-5 text-center">
-            {{ $memes->onEachSide(1)->links() }}
         </div>
     </div>
 
