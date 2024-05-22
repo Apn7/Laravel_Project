@@ -12,7 +12,7 @@ class NotifyUserFollowed
         Notification::create([
             'user_id' => $event->followed->id,
             'type' => 'user_followed',
-            'message' => "{$event->follower->name} has followed you",
+            'message' => "{$event->follower->username} has followed you",
             'notifiable_id' => $event->follower->id,
             'notifiable_type' => 'App\Models\User'
         ]);

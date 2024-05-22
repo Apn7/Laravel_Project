@@ -13,7 +13,7 @@ class NotifyMemeUploaded
             Notification::create([
                 'user_id' => $follower->id,
                 'type' => 'meme_uploaded',
-                'message' => "New meme uploaded by {$event->user->name}",
+                'message' => "New meme uploaded by {$event->user->username}",
                 'notifiable_id' => $event->meme->id,
                 'notifiable_type' => 'App\Models\Meme'
             ]);

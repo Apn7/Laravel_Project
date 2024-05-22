@@ -151,6 +151,25 @@ class HomeController extends Controller
         return view('edit_Meme', ['meme' => $meme]);
     }
 
+
+    public function editMemeTags(Request $request)
+    {
+        $memeId = $request->input('meme_id');
+        $newTags = $request->input('tags');
+
+        $userId = auth()->id();
+        $meme = Meme::where('id',$memeId)->where('user_id',$userId)->first();
+
+        if ($meme){
+            $meme->tags = $newTags;
+            $meme->save();
+        }
+        else{
+
+        }
+        return view('edit_meme', ['meme'=> $meme]);
+    }
+
     public function editMemeView($memeId)
     {
         // Find the meme by ID

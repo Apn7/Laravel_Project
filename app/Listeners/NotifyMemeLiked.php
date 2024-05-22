@@ -12,7 +12,7 @@ class NotifyMemeLiked
         Notification::create([
             'user_id' => $event->meme->user_id,
             'type' => 'meme_liked',
-            'message' => "{$event->user->name} liked your meme",
+            'message' => "{$event->user->username} liked your meme",
             'notifiable_id' => $event->meme->id,
             'notifiable_type' => 'App\Models\Meme'
         ]);

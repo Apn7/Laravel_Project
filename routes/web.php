@@ -32,6 +32,8 @@ Route::get('/editMemeView/{id}', [HomeController::class, 'editMemeView'])->name(
 
 Route::post('/editMeme', [HomeController::class, 'editMeme'])->name('editMeme');
 
+Route::post('/editMemeTags',[HomeController::class,'editMemeTags'])->name('editMemeTags');
+
 Route::match(['get', 'post'], '/profile/{username}', [ProfileController::class, 'profile'])->name('profile');
 
 Route::post('/follow', [ProfileController::class, 'follow'])->name('follow');
