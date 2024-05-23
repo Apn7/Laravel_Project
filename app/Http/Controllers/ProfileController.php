@@ -74,7 +74,6 @@ class ProfileController extends Controller
 
     public function editPass(Request $request)
     {
-
         $request->validate([
             'current' => 'required',
             'new' => 'required|confirmed',

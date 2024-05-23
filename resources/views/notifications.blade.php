@@ -22,6 +22,9 @@
         @empty
         <p class="text-center notification-empty">No notifications found.</p>
         @endforelse
+        <div class="mt-5 text-center">
+            {{ $notifications->onEachSide(1)->links() }}
+        </div>
     </div>
 </div>
 @endsection

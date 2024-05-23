@@ -15,7 +15,7 @@ class NotificationController extends Controller
             return redirect()->route('login');
         }
         //if (auth()->id()!= ){
-            $notifications = Notification::where('user_id', auth()->id())->latest()->get();
+            $notifications = Notification::where('user_id', auth()->id())->latest()->paginate(10);
         //}
 
         return view('notifications', ['notifications' => $notifications]);

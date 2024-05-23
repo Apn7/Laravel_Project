@@ -38,6 +38,9 @@ class UploadController extends Controller
         // Trigger the event after the meme is successfully saved
         event(new MemeUploaded($user, $meme));
 
+        // Set a success message in the session
+        session()->flash('success', 'Meme uploaded successfully!');
+
         return redirect()->route('home');
 
     }
@@ -63,6 +66,9 @@ class UploadController extends Controller
         $user = User::find($userID);
 
         $user->update($formFields);
+
+        // Set a success message in the session
+        session()->flash('success', 'Profile picture updated successfully!');
 
         return redirect()->route('profile', ['username' => $user->username]);
     }

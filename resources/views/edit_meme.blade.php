@@ -11,7 +11,7 @@
         <input type="hidden" name="meme_id" value="{{ $meme->id }}">
         <div class="form-group mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea id="description" name="description" rows="2" class="form-control mb-2"required>{{ $meme->description }}</textarea>
+            <input type="text" class="form-control" id="description" name="description" value="{{ $meme->description }}" required>
         </div>
         <button type="submit" class="btn btn-primary custom-button">Edit Description</button>
     </form>
@@ -24,8 +24,8 @@
         @csrf
         <input type="hidden" name="meme_id" value="{{ $meme->id }}">
         <div class="form-group mb-3">
-            <label for="tags" class="form-label">Tags (Comma Separated)</label>
-            <input type="text" class="form-control" id="tags" name="tags" value="{{ $meme->tags }}" required>
+            <label for="tags" class="form-label">Tags (press enter to add tag) </label>
+            <input type="text" class="form-control" id="tags" name="tags" value="{{ ($meme->tags) }}" required>
         </div>
         <button type="submit" class="btn btn-primary custom-button">Edit Tags</button>
     </form>
