@@ -791,6 +791,88 @@ body {
 }
 
 
+/* admin */
+
+.admin-dashboard {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.dashboard-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.05);
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+}
+
+.bg-gradient-danger {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+.dashboard-card .card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.dashboard-card .card-body h5 {
+    font-size: 2rem;
+    color: #fff;
+}
+
+.welcome-text {
+    font-size: 1.1rem;
+    color: #333;
+    margin-top: -10px;
+}
+
+/* user search */
+.searched_user-container {
+    padding: 2rem 0;
+}
+
+.searched_user-card {
+    background-color: #fff; /* Clean white background */
+    border: 1px solid #e1e1e1; /* Subtle border */
+    border-radius: 8px; /* Rounded corners for a smoother look */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    transition: all 0.3s ease-in-out;
+}
+
+.searched_user-card:hover {
+    transform: scale(1.03); /* Slight scale to provide feedback on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+.searched_user-body {
+    padding: 1rem; /* Spacious padding for text */
+    text-align: left; /* Aligns text to the left for a clean look */
+}
+
+.searched_user-title {
+    color: var(--primary-color, #007bff); /* Primary color for emphasis */
+    font-size: 1.25rem; /* Larger font size for visibility */
+    margin-bottom: 0.5rem; /* Space below the title */
+}
+
+.searched_user-text {
+    color: #666; /* Subtle text color for readability */
+    font-size: 1rem; /* Standard font size */
+}
+
+
 
 @media (max-width: 992px) {
     .navbar-search-logo-group {

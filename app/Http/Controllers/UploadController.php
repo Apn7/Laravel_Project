@@ -17,8 +17,9 @@ class UploadController extends Controller
 
 
         $formFields = $request->validate([
-            'description' => 'required',
-            'tags' => 'nullable|string'
+            'description' => 'nullable|string',
+            'tags' => 'nullable|string',
+            'imgurl' => 'required|image'
         ]);
 
         if ($request->hasFile('imgurl')) {
@@ -49,7 +50,7 @@ class UploadController extends Controller
     {
 
         $formFields = $request->validate([
-            'avatar' => 'required'
+            'avatar' => 'required|image'
         ]);
 
         if ($request->hasFile('avatar')) {

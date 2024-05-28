@@ -74,10 +74,12 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/makeAdmin',[AdminController::class,'makeAdmin'])->name('admin.makeAdmin');
     Route::get('/admin/context', [AdminController::class, 'context'])->name('admin.context');
     Route::post('/admin/uploadContext', [AdminController::class, 'uploadContext'])->name('admin.uploadContext');
+    Route::get('/admin/manageContext', [AdminController::class, 'manageContext'])->name('admin.manageContext');
+    Route::post('/admin/context/{id}/edit', [AdminController::class, 'editContext'])->name('admin.context.edit');
+    Route::delete('/admin/context/{id}/delete', [AdminController::class, 'deleteContext'])->name('admin.context.delete');
+
     // Add more admin routes as needed
 });
-
-//
 
 
 

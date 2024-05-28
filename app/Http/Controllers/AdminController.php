@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::all();
-        return view('admin.users',compact('users'));
+        return view('admin.users', compact('users'));
     }
 
     public function reports()
@@ -63,6 +63,12 @@ class AdminController extends Controller
         return view('admin.context_upload');
     }
 
+    public function manageContext()
+    {
+        $contexts = MemeContext::all();
+        return view('admin.manage_meme_con', compact('contexts'));
+    }
+
     public function uploadContext(Request $request)
     {
 
@@ -76,7 +82,7 @@ class AdminController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()) . '.' . $request->file('imgurl')->getClientOriginalExtension();
             $image = $manager->read($request->file('imgurl'));
-            $image->resize(500,500);
+            $image->resize(500, 500);
             $image->save(base_path('public/storage/memes_context/' . $name_gen));
             $formFields['imgurl'] = 'memes_context/' . $name_gen;
         }
@@ -84,5 +90,27 @@ class AdminController extends Controller
         MemeContext::create($formFields);
 
         return back();
+    }
+
+    public function editContext(Request $request, $id)
+    {
+        $context = MemeContext::findOrFail($id);
+
+        $formFields = $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        $context->update($formFields);
+
+        return back()->with('success', 'Context updated successfully!');
+    }
+
+    public function deleteContext($id)
+    {
+        $context = MemeContext::findOrFail($id);
+        $context->delete();
+
+        return back()->with('success', 'Context deleted successfully!');
     }
 }

@@ -51,6 +51,10 @@
                             <label class="form-label login-label">Password</label>
                             <input type="password" class="form-control login-input" name="password" placeholder="Enter your password">
                         </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                            <label for="remember" class="form-check-label">Remember Me</label>
+                        </div>
                         <button type="submit" class="btn login-submit-btn">Login</button>
                     </form>
 

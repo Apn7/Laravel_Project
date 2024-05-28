@@ -30,17 +30,20 @@
                             <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label">Caption</label>
                                     <textarea id="description" name="description" rows="3" class="form-control"
-                                        required></textarea>
+                                        placeholder="Enter a caption for your meme"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="tags" class="form-label">Tags (press enter to add tag)</label>
-                                    <input type="text" id="tags" name="tags" class="form-control">
+                                    <input type="text" id="tags" name="tags" class="form-control"
+                                    placeholder="Enter tags for your meme"
+                                    >
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Image</label>
-                                    <input type="file" id="imgurl" name="imgurl" class="form-control" required>
+                                    <input type="file" id="imgurl" name="imgurl" class="form-control"
+                                    required>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn custom-button">Upload</button>

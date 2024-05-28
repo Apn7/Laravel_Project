@@ -144,6 +144,8 @@ return [
     |
     */
 
+    'remember_me_lifetime' => 43200,
+
     'path' => env('SESSION_PATH', '/'),
 
     /*

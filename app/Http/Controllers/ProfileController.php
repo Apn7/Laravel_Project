@@ -96,12 +96,17 @@ class ProfileController extends Controller
     public function searchUsers(Request $request)
     {
         $query = $request->input('query');
+        $authUserId = auth()->id(); // Get the authenticated user's ID
 
-        $users = User::where('name', 'like', "%$query%")
-            ->orWhere('username', 'like', "%$query%")
+        $users = User::where('id', '!=', $authUserId) // Exclude the authenticated user
+            ->where(function ($q) use ($query) {
+                $q->where('name', 'like', "%$query%")
+                    ->orWhere('username', 'like', "%$query%");
+            })
             ->get();
 
         return view('searched_users', ['users' => $users]);
     }
+
 
 }

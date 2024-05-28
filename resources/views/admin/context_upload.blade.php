@@ -16,7 +16,7 @@
         </div>
         <div class="mb-3">
             <label for="image_path" class="form-label">Image</label>
-            <input type="file" class="form-control" id="imgurl" name="imgurl">
+            <input type="file" class="form-control" id="imgurl" name="imgurl" required>
         </div>
         <button type="submit" class="btn btn-success">Add Context</button>
     </form>
