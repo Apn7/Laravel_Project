@@ -28,6 +28,18 @@
                                 <button type="submit" class="btn btn-upload mt-2">Upload New DP</button>
                             </form>
                         @endif
+                        @if (Auth::id() != $user->id)
+                        @auth
+                        <form action="{{ route('follow') }}" method="post" class="mb-3">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                            <button type="submit"
+                                class="btn {{ Auth::user()->following->contains($user->id) ? 'btn-danger' : 'btn-primary' }}">
+                                {{ Auth::user()->following->contains($user->id) ? 'Unfollow' : 'Follow' }}
+                            </button>
+                        </form>
+                        @endauth
+                        @endif
 
                         <div class="profile-details text-start">
                             <p><strong>Name:</strong> {{ $user->name }}</p>

@@ -57,7 +57,7 @@ class UploadController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()) . '.' . $request->file('avatar')->getClientOriginalExtension();
             $image = $manager->read($request->file('avatar'));
-            $image->resize(50,50);
+            $image->resize(400,400);
             $image->save(base_path('public/storage/users_dp/' . $name_gen));
             $formFields['avatar'] = 'users_dp/' . $name_gen;
         }

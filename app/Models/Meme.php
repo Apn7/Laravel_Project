@@ -63,5 +63,6 @@ class Meme extends Model
     {
         return $this->likes->contains('user_id', auth()->id());
     }
+    
 
 }
