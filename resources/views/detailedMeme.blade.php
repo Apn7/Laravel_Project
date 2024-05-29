@@ -28,6 +28,7 @@
                         </div>
                     @else
                         <!-- Ensure users cannot report their own memes -->
+                        @auth
                         <form id="reportMemeForm{{ $meme->id }}" action="{{ route('report') }}" method="get">
                             @csrf
                             <input type="hidden" name="meme_id" value="{{ $meme->id }}">
@@ -36,6 +37,7 @@
                                 <i class="ri-flag-line"></i>
                             </button>
                         </form>
+                        @endauth
                     @endif
                 </div>
 
